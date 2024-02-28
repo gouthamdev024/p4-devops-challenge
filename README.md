@@ -1,6 +1,6 @@
 # Solution
 
-## Lmabda Functions
+## Lambda Functions
 
 ### ingest lambda
 
