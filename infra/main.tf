@@ -112,3 +112,4 @@ resource "aws_lambda_permission" "allow_s3_to_call_triggered_lambda" {
   principal     = "s3.amazonaws.com"
   source_arn    = aws_s3_bucket.input_bucket.arn
 }
+
