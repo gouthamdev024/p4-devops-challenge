@@ -16,7 +16,7 @@ def lambda_handler(event, context):
         'https://www.onetcenter.org/dl_files/database/db_28_2_excel/Abilities.xlsx'
     ]
 
-    print("ingest-lambda")
+    print("ingest-lambda...")
 
     for url in urls:
         file_name = url.split('/')[-1]
