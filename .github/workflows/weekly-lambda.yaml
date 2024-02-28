@@ -1,0 +1,39 @@
+name: Deploy Weekly Ingestion Lambda Function
+
+on:
+  push:
+    paths:
+      - 'ingest-lambda/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12' 
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+  
+
+    - name: Zip Lambda function
+      run: |
+        cd ingest-lambda
+        pip install boto3 -t .
+        pip install requests -t .
+        zip -r9 ../function.zip .
+
+    - name: Deploy to AWS Lambda
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+        LAMBDA_FUNCTION_NAME: "weeklyLambdaFunction"
+      run: |
+        aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://function.zip
