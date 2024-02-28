@@ -11,7 +11,8 @@ def lambda_handler(event, context):
     today_date = datetime.now().strftime('%d-%m-%Y')
     prefix = f"{today_date}/"
 
-    print("process-lambda")
+    print("process-lambda...")
+    
     # List files in the specific date folder
     response = s3.list_objects_v2(Bucket=input_bucket, Prefix=prefix)
 
