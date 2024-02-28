@@ -4,7 +4,7 @@ from contextlib import closing
 from datetime import datetime
 
 s3 = boto3.client('s3')
-bucket_name = 'p4-devops-input-bucket-2'  # Your specific bucket name
+bucket_name = 'p4-devops-input-bucket-2' 
 
 def lambda_handler(event, context):
     # Get today's date in DD-MM-YYYY format
